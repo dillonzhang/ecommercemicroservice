@@ -1,4 +1,4 @@
-package com.bdtv.ms.ecom.microservice.product.service;
+package com.bdtv.ms.ecom.product.service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

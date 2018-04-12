@@ -1,4 +1,4 @@
-package com.bdtv.ms.ecom.microservice.product.service.entity;
+package com.bdtv.ms.ecom.customer.service.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,20 +7,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Product {
+public class Customer {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
 	@Column
-	private String code;
-	
-	@Column
 	private String name;
 	
 	@Column
-	private String description;
+	private String email;
 
 	public Long getId() {
 		return id;
@@ -28,14 +25,6 @@ public class Product {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
 	}
 
 	public String getName() {
@@ -46,12 +35,12 @@ public class Product {
 		this.name = name;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	
+
 }
