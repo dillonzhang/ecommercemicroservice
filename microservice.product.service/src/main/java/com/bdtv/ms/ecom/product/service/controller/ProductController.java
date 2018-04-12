@@ -1,4 +1,4 @@
-package com.bdtv.ms.ecom.microservice.product.service.controller;
+package com.bdtv.ms.ecom.product.service.controller;
 
 import java.util.Optional;
 
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bdtv.ms.ecom.microservice.product.service.entity.Product;
-import com.bdtv.ms.ecom.microservice.product.service.repository.ProductRepository;
+import com.bdtv.ms.ecom.product.service.entity.Product;
+import com.bdtv.ms.ecom.product.service.repository.ProductRepository;
 
 @RestController
 @RequestMapping("/product")
