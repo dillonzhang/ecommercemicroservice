@@ -1,1 +1,1 @@
-this is a microservices demo project
+this is a microservices demo project for e-commerce
