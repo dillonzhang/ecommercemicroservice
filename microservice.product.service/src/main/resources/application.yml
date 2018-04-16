@@ -35,3 +35,10 @@ logging:
     org.hibernate: INFO
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
     org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery-eureka:8761/eureka/
+  instance:
+    preferIpAddress: true

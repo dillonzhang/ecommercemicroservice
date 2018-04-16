@@ -2,7 +2,7 @@ version: "3"
 
 services:
 
-  eureka:
+  discovery-eureka:
     image: ecom/microservice-discovery-eureka
     restart: always
     ports:
