@@ -7,24 +7,26 @@ This is a microservices demo project, please follow below steps to access them. 
 5. run data.sql that in the project's resources folder
 6. access http://localhost:8002/product/1 to see the result
 
-### ReadyMe for Docker
+## ReadyMe for Docker
 Precondition: Install docker and docker compose in your local
 
-#### Start a specific microservice
+### Start a specific microservice
 open terminal(cmd), navigate to the related folder and run below commands:
 Take microservice.product.service as example:
 
-##### build image
+#### build image
    cd microservice.product.service
 
-   mvnw install dockerfile:build
+   mvnw package dockerfile:build
 
-##### start service
+#### start service
    docker-compose up -d
 
 Then access http://localhost:8002/product/1 to see the result
 
 You can stop the service via command - docker-compose down
 
-#### Start all the microservice
-coming soon ...
+### Start all the microservices
+1. Go to each microservice, and run mvnw package dockerfile:build
+2. Go back to parent folder ecommercemicroservice, then type command -  docker-compose up -d
+3. Check the registered service on Eureka via http://localhost:8761
