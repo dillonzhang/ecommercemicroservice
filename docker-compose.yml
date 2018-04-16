@@ -18,7 +18,7 @@ services:
       DATABASE_PASSWORD: msecom
     restart: always
     ports:
-      - "8002:8002"
+      - "8002-8099:8002"
     depends_on:
       - mysql
 
