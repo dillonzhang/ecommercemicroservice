@@ -8,6 +8,12 @@ services:
     ports:
       - "8761:8761"
 
+  gateway-zuul:
+      image: ecom/microservice-gateway-zuul
+      restart: always
+      ports:
+        - "8902:8902"
+
   product-service:
     image: ecom/microservice.product.service
     environment:
