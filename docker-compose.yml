@@ -8,10 +8,16 @@ services:
     ports:
       - "8761:8761"
 
+  gateway-zuul:
+      image: ecom/microservice-gateway-zuul
+      restart: always
+      ports:
+        - "8902:8902"
+
   product-service:
     image: ecom/microservice.product.service
     environment:
-      DATABASE_HOST: mysql
+      DATABASE_HOST: mysql-product
       DATABASE_PORT: 3306
       DATABASE_NAME: msproduct
       DATABASE_USER: msecom
@@ -20,9 +26,9 @@ services:
     ports:
       - "8002-8099:8002"
     depends_on:
-      - mysql
+      - mysql-product
 
-  mysql:
+  mysql-product:
     image: mysql
     restart: always
     environment:
@@ -32,3 +38,32 @@ services:
       MYSQL_PASSWORD: msecom
     ports:
       - "3306:3306"
+
+  customer-service:
+      image: ecom/microservice.customer.service
+      environment:
+        DATABASE_HOST: mysql-customer
+        DATABASE_PORT: 3306
+        DATABASE_NAME: mscustomer
+        DATABASE_USER: msecom
+        DATABASE_PASSWORD: msecom
+      restart: always
+      ports:
+        - "8102-8199:8102"
+      depends_on:
+        - mysql-customer
+
+  mysql-customer:
+      image: mysql
+      restart: always
+      environment:
+        MYSQL_ROOT_PASSWORD: example
+        MYSQL_DATABASE: mscustomer
+        MYSQL_USER: msecom
+        MYSQL_PASSWORD: msecom
+      ports:
+        - "3316:3306"
+  ecommerce-storefront:
+        image: ecom/ecommerce-storefront
+        ports:
+          - "9001:9001"
