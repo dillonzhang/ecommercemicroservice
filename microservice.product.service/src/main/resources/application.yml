@@ -1,5 +1,5 @@
 server:
-  port: 8002
+  port: 8001
 spring:
   application:
     name: microservice.product.service
@@ -39,6 +39,6 @@ logging:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://discovery-eureka:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
   instance:
     preferIpAddress: true
