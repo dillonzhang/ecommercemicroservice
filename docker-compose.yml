@@ -63,3 +63,7 @@ services:
         MYSQL_PASSWORD: msecom
       ports:
         - "3316:3306"
+  ecommerce-storefront:
+        image: ecom/ecommerce-storefront
+        ports:
+          - "9001:9001"
