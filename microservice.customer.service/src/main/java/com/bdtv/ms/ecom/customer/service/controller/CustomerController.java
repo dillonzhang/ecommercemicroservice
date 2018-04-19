@@ -1,5 +1,6 @@
 package com.bdtv.ms.ecom.customer.service.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -24,9 +25,13 @@ import org.springframework.web.client.RestTemplate;
 
 
 
+
+
+
 import com.bdtv.ms.ecom.customer.service.data.Order;
 import com.bdtv.ms.ecom.customer.service.entity.Customer;
 import com.bdtv.ms.ecom.customer.service.repository.CustomerRepository;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 @RestController
 @RequestMapping("/customer")
@@ -49,10 +54,21 @@ public class CustomerController {
 		return customer;
 	}
 	
+	@HystrixCommand(fallbackMethod = "findAllOrdersByCustomerIdFallback")
 	@GetMapping("/{id}/orders")
-	public List<Order> findAllById(@PathVariable Long id) {
+	public List<Order> findAllOrdersByCustomerId(@PathVariable Long id) {
 		Order[] orderArray = restTemplate.getForObject("http://microservice.order.service/order/customer/"+ id, Order[].class);
 		return Arrays.asList(orderArray);
+	}
+	
+	public List<Order> findAllOrdersByCustomerIdFallback(Long id)
+	{
+		Order order = new Order();
+		order.setId(Long.valueOf(007));
+		order.setName("I am the fallback order, haha");
+		List<Order> orders =  new ArrayList<Order>();
+		orders.add(order);
+		return orders;
 	}
 	
 	@GetMapping("/log-customer-instance")
