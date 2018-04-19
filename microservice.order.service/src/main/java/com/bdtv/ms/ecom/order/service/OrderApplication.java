@@ -1,4 +1,4 @@
-package com.bdtv.ms.ecom.customer.service;
+package com.bdtv.ms.ecom.order.service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,9 +6,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class Application {
+public class OrderApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(OrderApplication.class, args);
 	}
 }
