@@ -3,30 +3,36 @@ version: "3"
 
 services:
 
-  product-service:
-    image: ecom/microservice.product.service
-    environment:
-      DATABASE_HOST: mysql
-      DATABASE_PORT: 3306
-      DATABASE_NAME: msproduct
-      DATABASE_USER: msecom
-      DATABASE_PASSWORD: msecom
+  discovery-eureka:
+    image: ecom/microservice-discovery-eureka
     restart: always
     ports:
-      - "8002:8002"
-    depends_on:
-      - mysql
+      - "8762:8761"
 
-  mysql:
-    image: mysql
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: example
-      MYSQL_DATABASE: msproduct
-      MYSQL_USER: msecom
-      MYSQL_PASSWORD: msecom
-    ports:
-      - "3306:3306"
+  product-service:
+      image: ecom/microservice.product.service
+      environment:
+        DATABASE_HOST: mysql-product
+        DATABASE_PORT: 3306
+        DATABASE_NAME: msproduct
+        DATABASE_USER: msecom
+        DATABASE_PASSWORD: msecom
+      restart: always
+      ports:
+        - "8002-8099:8002"
+      depends_on:
+        - mysql-product
+
+  mysql-product:
+      image: mysql
+      restart: always
+      environment:
+        MYSQL_ROOT_PASSWORD: example
+        MYSQL_DATABASE: msproduct
+        MYSQL_USER: msecom
+        MYSQL_PASSWORD: msecom
+      ports:
+        - "3306:3306"
 
 
 
