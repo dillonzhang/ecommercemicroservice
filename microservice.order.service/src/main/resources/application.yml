@@ -1,0 +1,46 @@
+server:
+  port: 8010
+spring:
+  application:
+    name: microservice.order.service
+  jpa:
+    database: MYSQL
+    hibernate:
+      ddl-auto: update
+  datasource:
+    driver: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/msorder?createDatabaseIfNotExist=true&useUnicode=true&autoReconnect=true
+    username: msecom
+    password: msecom
+logging:
+  level:
+    root: INFO
+    org.hibernate: INFO
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    preferIpAddress: true
+
+---
+spring:
+  profiles: container
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery-eureka:8761/eureka/
+
+---
+spring:
+  profiles: container
+  jpa:
+    show-sql: true
+  datasource:
+    driver: com.mysql.jdbc.Driver
+    url: jdbc:mysql://${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}?useSSL=false
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}

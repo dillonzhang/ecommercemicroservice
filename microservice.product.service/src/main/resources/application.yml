@@ -1,5 +1,5 @@
 server:
-  port: 8002
+  port: 8001
 spring:
   application:
     name: microservice.product.service
@@ -12,9 +12,45 @@ spring:
     url: jdbc:mysql://localhost:3306/msproduct?createDatabaseIfNotExist=true&useUnicode=true&autoReconnect=true
     username: msecom
     password: msecom
+    initialize: false
+
+---
+spring:
+  profiles: container
+  jpa:
+    show-sql: true
+  datasource:
+    driver: com.mysql.jdbc.Driver
+    url: jdbc:mysql://${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}?useSSL=false
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
+    initialize: true
+    initialization-mode: always
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream, info, health
+
 logging:
   level:
     root: INFO
     org.hibernate: INFO
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
     org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    preferIpAddress: true
+
+---
+spring:
+  profiles: container
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery-eureka:8761/eureka/

@@ -1,0 +1,9 @@
+version: "3"
+
+services:
+
+  eureka:
+    image: ecom/microservice-discovery-eureka
+    restart: always
+    ports:
+      - "8761:8761"

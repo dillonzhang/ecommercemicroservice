@@ -1,0 +1,60 @@
+version: "3"
+
+services:
+
+  discovery-eureka:
+    image: ecom/microservice-discovery-eureka
+    restart: always
+    ports:
+      - "8761:8761"
+
+  customer-service:
+    image: ecom/microservice.customer.service
+    environment:
+      DATABASE_HOST: mysql-customer
+      DATABASE_PORT: 3306
+      DATABASE_NAME: mscustomer
+      DATABASE_USER: msecom
+      DATABASE_PASSWORD: msecom
+    restart: always
+    ports:
+      - "8102-8199:8102"
+    depends_on:
+      - mysql-customer
+
+  mysql-customer:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: mscustomer
+      MYSQL_USER: msecom
+      MYSQL_PASSWORD: msecom
+    ports:
+      - "3316:3306"
+
+  order-service:
+    image: ecom/microservice.order.service
+    environment:
+      DATABASE_HOST: mysql-order
+      DATABASE_PORT: 3306
+      DATABASE_NAME: msorder
+      DATABASE_USER: msecom
+      DATABASE_PASSWORD: msecom
+    restart: always
+    ports:
+      - "8202-8299:8202"
+    depends_on:
+      - mysql-order
+
+  mysql-order:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: msorder
+      MYSQL_USER: msecom
+      MYSQL_PASSWORD: msecom
+    ports:
+      - "3326:3306"
+
