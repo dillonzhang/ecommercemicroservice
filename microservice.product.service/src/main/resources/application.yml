@@ -27,7 +27,11 @@ spring:
     initialize: true
     initialization-mode: always
 
-
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream, info, health
 
 logging:
   level:

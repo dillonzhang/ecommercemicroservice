@@ -50,6 +50,7 @@ public class CustomerController {
 	
 	@GetMapping("/{id}")
 	public Optional<Customer> findById(@PathVariable Long id) {
+		LOGGER.info("call microservice.customer.service");
 		Optional<Customer> customer = this.productRepository.findById(id);
 		return customer;
 	}
