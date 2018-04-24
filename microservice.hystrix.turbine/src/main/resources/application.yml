@@ -1,0 +1,24 @@
+server:
+  port: 8030
+spring:
+  application:
+    name: microservice.hystrix.turbine
+
+turbine:
+  appConfig: microservice.product.service,microservice.order.service,microservice.customer.service
+  clusterNameExpression: "'default'"
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    preferIpAddress: true
+
+---
+spring:
+  profiles: container
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery-eureka:8761/eureka/
