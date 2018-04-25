@@ -5,7 +5,6 @@ import java.util.List;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.bdtv.ms.ecom.product.service.entity.Product;
@@ -35,10 +34,9 @@ public class DefaultProductService implements ProductService {
 	}
 
 	@Override
-	public ResponseEntity<?> deleteProductById(@NotNull Long productId) {
+	public void deleteProductById(@NotNull Long productId) {
 		Product p = productRepository.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Product", "id", productId));
 		productRepository.delete(p);
-		return ResponseEntity.ok().build();
 	}
 
 	@Override
