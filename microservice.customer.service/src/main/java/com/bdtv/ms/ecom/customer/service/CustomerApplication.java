@@ -13,11 +13,11 @@ import org.springframework.web.client.RestTemplate;
 @EnableCircuitBreaker
 public class CustomerApplication {
 
-	  @Bean
-	  @LoadBalanced
-	  public RestTemplate restTemplate() {
+	@Bean
+	@LoadBalanced
+	public RestTemplate restTemplate() {
 	    return new RestTemplate();
-	  }
+	}
 	  
 	public static void main(String[] args) {
 		SpringApplication.run(CustomerApplication.class, args);
