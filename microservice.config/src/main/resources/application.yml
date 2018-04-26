@@ -1,0 +1,10 @@
+server:
+  port: 9090
+spring:
+  application:
+    name: microservice.config
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/walkerliu81/spring-cloud-config-repo
