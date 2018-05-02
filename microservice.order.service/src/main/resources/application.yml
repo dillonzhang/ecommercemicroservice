@@ -29,6 +29,8 @@ eureka:
 ---
 spring:
   profiles: container
+server:
+  port: 8202
 eureka:
   client:
     serviceUrl:
