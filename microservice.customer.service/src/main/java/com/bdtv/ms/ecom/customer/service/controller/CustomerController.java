@@ -25,7 +25,6 @@ import springfox.documentation.annotations.ApiIgnore;
 
 import com.bdtv.ms.ecom.customer.service.data.Order;
 import com.bdtv.ms.ecom.customer.service.entity.Customer;
-import com.bdtv.ms.ecom.customer.service.repository.CustomerRepository;
 import com.bdtv.ms.ecom.customer.service.service.CustomerService;
 
 @RestController
@@ -34,9 +33,6 @@ import com.bdtv.ms.ecom.customer.service.service.CustomerService;
 public class CustomerController{
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(CustomerController.class);
-
-	@Autowired
-	private CustomerRepository productRepository;
 	
 	@Autowired
 	private LoadBalancerClient loadBalancerClient;
@@ -82,7 +78,7 @@ public class CustomerController{
 	@ApiOperation(value="create a customer", nickname= "createCustomer", notes="this is the method to create a product")
 	@ApiImplicitParam(name = "customer", value = "Entry Customer", required = true, dataType = "Customer")
 	@PostMapping(value = "/customer")
-	public ResponseEntity<Customer> createUser(@Valid @RequestBody Customer customer) {
+	public ResponseEntity<Customer> createCustomer(@Valid @RequestBody Customer customer) {
 		try {
 			Customer c = customerService.createCustomer(customer);
 			return ResponseEntity.status(HttpStatus.OK).body(c);
