@@ -11,6 +11,8 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,17 +28,27 @@ import com.bdtv.ms.ecom.product.service.entity.Product;
 import com.bdtv.ms.ecom.product.service.service.ProductService;
 
 @RestController
+@RefreshScope
 @RequestMapping("/productapi")
 public class ProductController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
 
 	@Autowired
 	private ProductService productService;
+
+	@Value("${mockEnabled}")
+	private String mockEnabled;
 	
 	@ApiOperation(value="get product by ID", notes="this is the method to retrive a product by ID")
 	@ApiImplicitParam(name = "id", value = "product ID", required = true, dataType = "Long", paramType="path")
 	@GetMapping("/product/{id}")
 	public ResponseEntity<Product> findById(@PathVariable Long id) {
+		LOGGER.debug("mockEnabled is {} ", this.mockEnabled);
+		if ("true".equalsIgnoreCase(mockEnabled)){
+			Product product = this.createMockProduct();
+			return ResponseEntity.status(HttpStatus.OK).body(product);
+		}
+
 		try {
 			Product p = this.productService.getProductById(id);
 			return ResponseEntity.status(HttpStatus.OK).body(p);
@@ -99,5 +111,15 @@ public class ProductController {
 			LOGGER.error(e.getMessage(), e);
 		} 
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+	}
+
+	private Product createMockProduct(){
+		Product product = new Product();
+		product.setId(100L);
+		product.setCode("001");
+		product.setName("Mock Product");
+		product.setDescription("Description for mock product");
+
+		return product;
 	}
 }
