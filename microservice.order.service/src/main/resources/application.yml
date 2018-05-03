@@ -19,6 +19,12 @@ logging:
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
     org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream, info, health
+
 eureka:
   client:
     serviceUrl:

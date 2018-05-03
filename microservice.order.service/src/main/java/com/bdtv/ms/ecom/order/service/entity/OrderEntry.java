@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -24,23 +25,27 @@ public class OrderEntry {
 	private Long id;
 	
 	@Column
+	@NotNull
 	private BigDecimal totalPrice;
 	
 	@Column
+	@NotNull
 	private BigDecimal subTotal;
 	
 	@Column
 	private BigDecimal tax;
 	
 	@Column
+	@NotNull
 	private Long productId;
 	
 	@Column
+	@NotNull
 	private String count;
 	
 	@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},fetch=FetchType.EAGER,optional=false)  
-    @JoinColumn(name="order_id", nullable = false)  
 	@JsonIgnore
+    @JoinColumn(name="orders_id", nullable = false)  
 	private Order order;
 	
 	public Long getId() {

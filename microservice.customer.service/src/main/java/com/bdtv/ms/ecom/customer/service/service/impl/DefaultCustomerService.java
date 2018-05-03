@@ -59,7 +59,7 @@ public class DefaultCustomerService implements CustomerService {
 	@HystrixCommand(fallbackMethod = "findAllOrdersByCustomerIdFallback")
 	@Override
 	public List<Order> getOrdersByCustomerId(Long customerId) {
-		Order[] orderArray = restTemplate.getForObject("http://microservice.order.service/order/customer/"+ customerId, Order[].class);
+		Order[] orderArray = restTemplate.getForObject("http://microservice.order.service/orderapi/customer/"+ customerId, Order[].class);
 		return Arrays.asList(orderArray);
 	}
 	
