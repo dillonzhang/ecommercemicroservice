@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -59,7 +60,16 @@ public class OrderController {
 	       @ApiImplicitParam(name = "order", value = "Entry order", required = true, dataType = "Order")
 	})
 	@PutMapping("/order/{id}")
-	public ResponseEntity<Order> updateProduct(@PathVariable(value = "id") Long orderId, @Valid @RequestBody Order order) {
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+	public ResponseEntity<Order> updateOrder(@PathVariable(value = "id") Long orderId, @Valid @RequestBody Order order) {
+		Order o = this.orderService.updateOrder(orderId, order);
+		return ResponseEntity.status(HttpStatus.OK).body(o);
+	}
+	
+	@ApiOperation(value="delete order information", notes="update the order information according the ID and order Model in the parameters")
+	@ApiImplicitParam(name = "id", value = "order ID", required = true, dataType = "Long", paramType="path")
+	@DeleteMapping("/order/{id}")
+	public ResponseEntity<Order> deleteOrder(@PathVariable(value = "id") Long orderId) {
+		this.orderService.deleteOrderById(orderId);
+		return ResponseEntity.status(HttpStatus.OK).build();
 	}
 }

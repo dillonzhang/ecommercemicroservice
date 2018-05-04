@@ -41,7 +41,7 @@ public class Order {
 	@NotNull
 	private Long customerId;
 	
-    @OneToMany(cascade={CascadeType.REFRESH,CascadeType.MERGE,CascadeType.REMOVE,CascadeType.PERSIST},fetch=FetchType.LAZY,mappedBy="order")  
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy="order")  
     private Set<OrderEntry> orderEntries;  
     
 	public Long getId() {
