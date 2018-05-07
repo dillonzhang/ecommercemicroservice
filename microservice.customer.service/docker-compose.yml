@@ -23,7 +23,7 @@ services:
       - mysql-customer
 
   mysql-customer:
-    image: mysql
+    image: mysql:5.7
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: example
@@ -48,7 +48,7 @@ services:
       - mysql-order
 
   mysql-order:
-    image: mysql
+    image: mysql:5.7
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: example
