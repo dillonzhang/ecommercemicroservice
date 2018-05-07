@@ -2,6 +2,12 @@ version: "3"
 
 services:
 
+  config-server:
+    image: ecom/microservice-config
+    restart: always
+    ports:
+      - "9090:9090"
+
   discovery-eureka:
     image: ecom/microservice-discovery-eureka
     restart: always
@@ -26,10 +32,11 @@ services:
     ports:
       - "8002-8099:8002"
     depends_on:
+      - config-server
       - mysql-product
 
   mysql-product:
-    image: mysql
+    image: mysql:5.7
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: example
@@ -54,7 +61,7 @@ services:
       - mysql-customer
 
   mysql-customer:
-    image: mysql
+    image: mysql:5.7
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: example
@@ -79,7 +86,7 @@ services:
       - mysql-order
 
   mysql-order:
-    image: mysql
+    image: mysql:5.7
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: example

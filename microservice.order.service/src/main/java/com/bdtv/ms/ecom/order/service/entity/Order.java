@@ -13,20 +13,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="orders")  
 public class Order {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="order_id")  
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column
+	@NotNull
 	private String name;
 	  
 	@Column
+	@NotNull
 	private BigDecimal totalPrice;
 	
 	@Column
@@ -36,9 +38,10 @@ public class Order {
 	private BigDecimal tax;
 	
 	@Column
+	@NotNull
 	private Long customerId;
 	
-    @OneToMany(cascade={CascadeType.REFRESH,CascadeType.MERGE,CascadeType.REMOVE,CascadeType.PERSIST},fetch=FetchType.LAZY,mappedBy="order")  
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy="order")  
     private Set<OrderEntry> orderEntries;  
     
 	public Long getId() {

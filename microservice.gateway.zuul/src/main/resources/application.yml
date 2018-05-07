@@ -10,3 +10,11 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
   instance:
     preferIpAddress: true
+
+---
+spring:
+  profiles: container
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery-eureka:8761/eureka/

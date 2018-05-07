@@ -14,18 +14,6 @@ spring:
     password: msecom
     initialize: false
 
----
-spring:
-  profiles: container
-  jpa:
-    show-sql: true
-  datasource:
-    driver: com.mysql.jdbc.Driver
-    url: jdbc:mysql://${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}?useSSL=false
-    username: ${DATABASE_USER}
-    password: ${DATABASE_PASSWORD}
-    initialize: true
-    initialization-mode: always
 
 management:
   endpoints:
@@ -47,10 +35,5 @@ eureka:
   instance:
     preferIpAddress: true
 
----
-spring:
-  profiles: container
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://discovery-eureka:8761/eureka/
+
+

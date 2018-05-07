@@ -6,6 +6,7 @@ This is a microservices demo project, please follow below steps to access them. 
 4. check the log in 1.log that in target folder
 5. run data.sql that in the project's resources folder
 6. access http://localhost:8002/product/1 to see the result
+7. check API from Swagger localhost:8102/swagger-ui.html
 
 ## ReadyMe for Docker
 Precondition: Install docker and docker compose in your local
