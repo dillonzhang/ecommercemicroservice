@@ -15,6 +15,7 @@ node {
 
 }
 
+@NonCPS
 def readDir(rootPath) {
     def dirsl = []
     new File(rootPath).eachDir()
