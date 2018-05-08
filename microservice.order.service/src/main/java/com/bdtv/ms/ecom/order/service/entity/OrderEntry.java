@@ -2,7 +2,6 @@ package com.bdtv.ms.ecom.order.service.entity;
 
 import java.math.BigDecimal;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,13 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="order_entry")  
 public class OrderEntry {
 
 	@Id
@@ -43,9 +40,9 @@ public class OrderEntry {
 	@NotNull
 	private String count;
 	
-	@ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},fetch=FetchType.EAGER,optional=false)  
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
-    @JoinColumn(name="orders_id", nullable = false)  
+    @JoinColumn(name="order_id", nullable = false)  
 	private Order order;
 	
 	public Long getId() {

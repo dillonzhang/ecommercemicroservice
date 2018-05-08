@@ -12,6 +12,11 @@ spring:
     url: jdbc:mysql://localhost:3306/mscustomer?createDatabaseIfNotExist=true&useUnicode=true&autoReconnect=true
     username: msecom
     password: msecom
+  zipkin:
+    base-url: http://localhost:9411
+  sleuth:
+    sampler:
+      percentage: 1.0
 
 management:
   endpoints:
