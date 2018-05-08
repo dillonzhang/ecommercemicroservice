@@ -2,6 +2,8 @@ node {
     def mvnHome
     stage('Build') { // for display purposes
         echo "${workspace}"
+        //checkout code
+        checkout scm
 
         microserviceProjects = readDir("${workspace}")
         println microserviceProjects
