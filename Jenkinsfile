@@ -1,5 +1,4 @@
 node {
-    def mvnHome
     stage('Build') { // for display purposes
         echo "${workspace}"
         //checkout code
@@ -8,7 +7,8 @@ node {
         microserviceProjects = readDir("${workspace}")
         println microserviceProjects
         microserviceProjects.each { projectName ->
-            sh "mvn -f ${projectName}/pom.xml clean package"
+            if ("microservice.product.service".equals(projectName))
+            sh "mvn -f ${projectName}/pom.xml deploy"
         }
     }
 
