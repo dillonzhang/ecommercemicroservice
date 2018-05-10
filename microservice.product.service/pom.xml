@@ -125,7 +125,7 @@
                 <configuration>
                     <username>Admin</username>
                     <password>Harbor12345</password>
-                    <repository>ecom/${project.artifactId}</repository>
+                    <repository>http://10.34.0.143/ecommerce/${project.artifactId}</repository>
                     <buildArgs>
                         <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
                     </buildArgs>
