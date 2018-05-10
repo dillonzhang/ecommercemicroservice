@@ -7,8 +7,7 @@ node {
         microserviceProjects = readDir("${workspace}")
         println microserviceProjects
         microserviceProjects.each { projectName ->
-            if ("microservice.product.service".equals(projectName))
-            sh "mvn -f ${projectName}/pom.xml deploy"
+            sh "mvn -f ${projectName}/pom.xml dockerfile:build dockerfile:push"
         }
     }
 
