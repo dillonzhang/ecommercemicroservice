@@ -8,7 +8,7 @@ node {
         println microserviceProjects
         microserviceProjects.each { projectName ->
             if ("microservice.product.service".equals(projectName))
-            sh "mvn -f ${projectName}/pom.xml dockerfile:build"
+            sh "mvn -f ${projectName}/pom.xml dockerfile:build dockerfile:push"
         }
     }
 
