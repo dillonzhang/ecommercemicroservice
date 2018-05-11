@@ -15,8 +15,8 @@ spring:
   datasource:
     driver: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/mscart?createDatabaseIfNotExist=true&useUnicode=true&autoReconnect=true
-    username: root
-    password: 123
+    username: msecom
+    password: msecom
 logging:
   level:
     root: INFO
