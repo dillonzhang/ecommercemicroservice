@@ -1,8 +1,12 @@
 package com.bdtv.ms.ecom.cart.service.entity;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 
@@ -38,6 +42,16 @@ public class Cart
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "cart")
 	private List<CartEntry> entries;
+
+	@Column(updatable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	@CreationTimestamp
+	private Date createTime;
+
+	@Column
+	@Temporal(TemporalType.TIMESTAMP)
+	@UpdateTimestamp
+	private Date modifiedTime;
 
 	public Long getId()
 	{
@@ -107,5 +121,25 @@ public class Cart
 	public void setEntries(final List<CartEntry> entries)
 	{
 		this.entries = entries;
+	}
+
+	public Date getCreateTime()
+	{
+		return createTime;
+	}
+
+	public void setCreateTime(final Date createTime)
+	{
+		this.createTime = createTime;
+	}
+
+	public Date getModifiedTime()
+	{
+		return modifiedTime;
+	}
+
+	public void setModifiedTime(final Date modifiedTime)
+	{
+		this.modifiedTime = modifiedTime;
 	}
 }

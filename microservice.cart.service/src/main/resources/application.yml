@@ -15,8 +15,8 @@ spring:
   datasource:
     driver: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/mscart?createDatabaseIfNotExist=true&useUnicode=true&autoReconnect=true
-    username: msecom
-    password: msecom
+    username: root
+    password: 123
 logging:
   level:
     root: INFO
@@ -38,6 +38,9 @@ eureka:
   instance:
     preferIpAddress: true
 
+feign:
+  hystrix:
+    enabled: true
 ---
 spring:
   profiles: container

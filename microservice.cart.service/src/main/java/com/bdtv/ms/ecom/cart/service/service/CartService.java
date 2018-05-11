@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface CartService
 {
-	Cart createCart();
+	Cart createCart(final Long customerId);
 
 	Cart getCartById(final Long id);
 
@@ -27,4 +27,8 @@ public interface CartService
 	void deleteCart(final Long id);
 
 	void deleteCartEntry(final Long id);
+
+	Cart addToCart(final Long productId, final Long quantity, final Long customerId, final Long cartId);
+
+	Cart getLatestCartByCustomerId(final Long customerId);
 }

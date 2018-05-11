@@ -1,4 +1,4 @@
-package com.bdtv.ms.ecom.order.service.data;
+package com.bdtv.ms.ecom.cart.service.data;
 
 /**
  * @author dangao on 5/10/2018.
@@ -10,6 +10,7 @@ public class Product
 	private String code;
 	private String name;
 	private String description;
+	private double price;
 
 	public Long getId() {
 		return id;
@@ -41,5 +42,15 @@ public class Product
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public double getPrice()
+	{
+		return price;
+	}
+
+	public void setPrice(final double price)
+	{
+		this.price = price;
 	}
 }

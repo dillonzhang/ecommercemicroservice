@@ -1,15 +1,22 @@
 package com.bdtv.ms.ecom.cart.service.service.impl;
 
+import com.bdtv.ms.ecom.cart.service.data.Product;
 import com.bdtv.ms.ecom.cart.service.entity.Cart;
 import com.bdtv.ms.ecom.cart.service.entity.CartEntry;
+import com.bdtv.ms.ecom.cart.service.feign.ProductFeignClient;
 import com.bdtv.ms.ecom.cart.service.repository.CartEntryRepository;
 import com.bdtv.ms.ecom.cart.service.repository.CartRepository;
 import com.bdtv.ms.ecom.cart.service.service.CartService;
+import com.bdtv.ms.ecom.cart.service.service.exception.CartNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.math.BigDecimal;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -27,13 +34,16 @@ public class DefaultCartService implements CartService
 	@Autowired
 	private CartEntryRepository cartEntryRepository;
 
+	@Autowired
+	private ProductFeignClient productFeignClient;
+
 	@Override
-	public Cart createCart()
+	public Cart createCart(final Long customerId)
 	{
 		Cart cart = new Cart();
 		cart.setName("00000");
 		cart.setTotalPrice(BigDecimal.ZERO);
-		cart.setCustomerId(Long.valueOf(1111111111));
+		cart.setCustomerId(customerId);
 		return cartRepository.save(cart);
 	}
 
@@ -79,5 +89,64 @@ public class DefaultCartService implements CartService
 	public void deleteCartEntry(final Long id)
 	{
 		cartEntryRepository.deleteCartEntryById(id);
+	}
+
+	@Override
+	public Cart addToCart(final Long productId, final Long quantity, final Long customerId, final Long cartId)
+	{
+		Cart cart;
+		if (cartId == null)
+		{
+			cart = this.getLatestCartByCustomerId(customerId);
+		}
+		else
+		{
+			cart = this.getCartById(cartId);
+			if (cart == null)
+			{
+				throw new CartNotFoundException("Cart with id[" + cartId + "] is not found.");
+			}
+		}
+
+		CartEntry cartEntry = null;
+		if (!CollectionUtils.isEmpty(cart.getEntries()))
+		{
+			cartEntry = cart.getEntries().stream().filter(e -> e.getProductId().equals(productId)).findFirst().orElse(null);
+		}
+
+		if (cartEntry != null)
+		{
+			cartEntry.setCount(cartEntry.getCount() + quantity);
+		}
+		else
+		{
+			cartEntry = new CartEntry();
+			cartEntry.setCount(quantity);
+			cartEntry.setCart(cart);
+			cartEntry.setProductId(productId);
+			//TODO calculate price
+			ResponseEntity<Product> productResponseEntity = productFeignClient.findById(productId);
+			Product product = productResponseEntity.getBody();
+			cartEntry.setSubTotal(BigDecimal.ZERO);
+			cartEntry.setTax(BigDecimal.ZERO);
+			cartEntry.setTotalPrice(BigDecimal.ZERO);
+		}
+
+		this.cartEntryRepository.saveAndFlush(cartEntry);
+		return this.getCartById(cart.getId());
+	}
+
+	@Override
+	public Cart getLatestCartByCustomerId(final Long customerId)
+	{
+		List<Cart> carts = this.getCartsByCustomerId(customerId);
+		if (CollectionUtils.isEmpty(carts))
+		{
+			return this.createCart(customerId);
+		}
+		else
+		{
+			return carts.stream().max(Comparator.comparing(Cart::getModifiedTime)).get();
+		}
 	}
 }

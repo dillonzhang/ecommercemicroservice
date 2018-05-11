@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.ws.Response;
 import java.util.List;
 
 
@@ -26,10 +27,11 @@ public class CartController
 	private CartService cartService;
 
 	@ApiOperation(value = "Create a empty Cart", nickname = "createCart")
-	@GetMapping("/create")
-	public ResponseEntity<Cart> createCart()
+	@ApiImplicitParam(name = "customerId", value = "Customer Id", dataType = "Long", required = true)
+	@PostMapping("/create")
+	public ResponseEntity<Cart> createCart(@RequestParam final Long customerId)
 	{
-		return ResponseEntity.status(HttpStatus.OK).body(this.cartService.createCart());
+		return ResponseEntity.status(HttpStatus.OK).body(this.cartService.createCart(customerId));
 	}
 
 	@ApiOperation(value = "Get cart data by cart id", nickname = "getCartById")
@@ -92,5 +94,20 @@ public class CartController
 	{
 		this.cartService.deleteCartEntry(entryId);
 		return ResponseEntity.status(HttpStatus.OK).build();
+	}
+
+	@ApiOperation(value = "Add product to cart by product id", nickname = "addProductToCartById")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "customerId", value = "Customer Id", required = true, dataType = "Long", paramType = "query"),
+			@ApiImplicitParam(name = "productId", value = "Product Id", required = true, dataType = "Long", paramType = "query"),
+			@ApiImplicitParam(name = "quantity", value = "Product Quantity", required = true, dataType = "Long", paramType = "query"),
+			@ApiImplicitParam(name = "cartId", value = "Cart Id", required = false, dataType = "Long", paramType = "query") })
+	@PostMapping("/addToCart")
+	public ResponseEntity<Cart> addProductToCartById(@RequestParam(name = "customerId") final Long customerId,
+			@RequestParam(name = "productId") final Long productId, @RequestParam(name = "quantity") final Long quantity,
+			@RequestParam(name = "cartId", required = false) final Long cartId)
+	{
+		Cart cart = this.cartService.addToCart(productId, quantity, customerId, cartId);
+		return ResponseEntity.status(HttpStatus.OK).body(cart);
 	}
 }
