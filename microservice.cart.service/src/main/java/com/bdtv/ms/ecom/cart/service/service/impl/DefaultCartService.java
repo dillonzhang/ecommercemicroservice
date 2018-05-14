@@ -125,8 +125,6 @@ public class DefaultCartService implements CartService
 			cartEntry.setCart(cart);
 			cartEntry.setProductId(productId);
 			//TODO calculate price
-			ResponseEntity<Product> productResponseEntity = productFeignClient.findById(productId);
-			Product product = productResponseEntity.getBody();
 			cartEntry.setSubTotal(BigDecimal.ZERO);
 			cartEntry.setTax(BigDecimal.ZERO);
 			cartEntry.setTotalPrice(BigDecimal.ZERO);
