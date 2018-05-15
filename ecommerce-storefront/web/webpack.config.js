@@ -3,6 +3,7 @@ const  webpack = require('webpack');
 const  HtmlWebpackPlugin = require('html-webpack-plugin');
 //const  ExtractTextPlugin = require('extract-text-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -10,7 +11,8 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: '[name].[hash].bundle.js'
+        filename: '[name].bundle.js'
+        // filename: '[name].[hash].bundle.js'
     }, 
     devtool: "source-map",   
     module: {
@@ -33,7 +35,7 @@ module.exports = {
                   'less-loader'
                 ]
               },      
-           { test: /\.js$/,
+           { test: /\.js|jsx$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader',
              /*   use: {
@@ -62,6 +64,9 @@ module.exports = {
         ]
     },
     plugins: [
+        // new CleanWebpackPlugin('dist/*.*', {
+        //     root: __dirname
+        // }),
         new HtmlWebpackPlugin({
             template: 'src/template/index.html'           
         }),
@@ -71,13 +76,13 @@ module.exports = {
     ],
     devServer: {
         contentBase: path.join(__dirname, "dist"), 
-        port: 9000, 
-        host: '10.32.154.111',
+        port: 8000, 
+        // host: '10.32.153.147',
         open:true, 
         compress: true,
         historyApiFallback: true,
         watchContentBase: true,
-        inline: true,
+        inline: true,        
         watchOptions: {
             poll: true
         }
