@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Button,Alert ,Grid,Row,Col} from 'react-bootstrap';
 
-import Test from './test.jsx';
+import Header from './header/index.jsx';
 import axios from 'axios';
 
 class Box extends React.Component {  
@@ -82,7 +82,7 @@ class Box extends React.Component {
                     */}           
                 
                 <p>{this.state.customer.id}</p>
-                <Test name="test" />
+                <Header />
             </div>
         );
     }
