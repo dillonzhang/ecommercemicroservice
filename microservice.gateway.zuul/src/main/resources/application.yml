@@ -8,14 +8,21 @@ spring:
   sleuth:
     sampler:
       percentage: 1.0
-
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
   instance:
     preferIpAddress: true
-
+security:
+  oauth2:
+    client:
+      accessTokenUri: http://localhost:8902/microservice.auth.service/oauth/token
+      userAuthorizationUri: http://localhost:8902/microservice.auth.service/oauth/authorize
+      clientAuthenticationScheme: form
+    resource:
+      userInfoUri: http://localhost:8902/microservice.auth.service/user
+      preferTokenInfo: false  
 ---
 spring:
   profiles: container
