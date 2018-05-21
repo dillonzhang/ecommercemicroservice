@@ -8,11 +8,9 @@ This is a microservices demo project, please follow below steps to access them. 
 6. access http://localhost:8002/product/1 to see the result
 7. check API from Swagger localhost:8102/swagger-ui.html
 8. get token http://localhost:8902/microservice.auth.service/oauth/token
-![]
-(https://github.com/dillonzhang/ecommercemicroservice/blob/develop/img-folder/gettoken.PNG)
+![](https://github.com/dillonzhang/ecommercemicroservice/blob/develop/img-folder/gettoken.PNG)
 9. use token 
-![]
-(https://github.com/dillonzhang/ecommercemicroservice/blob/develop/img-folder/usetoken.PNG)
+![](https://github.com/dillonzhang/ecommercemicroservice/blob/develop/img-folder/usetoken.PNG)
 ## ReadyMe for Docker
 Precondition: Install docker and docker compose in your local
 
