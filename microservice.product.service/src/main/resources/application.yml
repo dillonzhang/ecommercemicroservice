@@ -18,18 +18,22 @@ spring:
   sleuth:
     sampler:
       percentage: 1.0
-
-
+security:
+  oauth2:
+    resource:
+      id: microservice.product.service
+      userInfoUri: http://localhost:8902/microservice.auth.service/user
+      preferTokenInfo: false
 management:
   endpoints:
     web:
       exposure:
         include: hystrix.stream, info, health
-
 logging:
   level:
     root: INFO
     org.hibernate: INFO
+    org.springframework.security: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
     org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
 

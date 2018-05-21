@@ -1,4 +1,4 @@
-package com.bdtv.ms.ecom.order.service.config;
+package com.bdtv.ms.ecom.customer.service.config;
 
 import javax.servlet.http.HttpServletResponse;
 

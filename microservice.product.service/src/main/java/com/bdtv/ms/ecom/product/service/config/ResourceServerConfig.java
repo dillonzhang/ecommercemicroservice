@@ -1,4 +1,4 @@
-package com.bdtv.ms.ecom.order.service.config;
+package com.bdtv.ms.ecom.product.service.config;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -39,7 +39,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 				.authenticationEntryPoint(
 						(request, response, authException) -> response
 								.sendError(HttpServletResponse.SC_UNAUTHORIZED))
-				.and().authorizeRequests().antMatchers("/orderapi/**")
+				.and().authorizeRequests().antMatchers("/productapi/**")
 				.authenticated().and().httpBasic();
 	}
 }

@@ -21,8 +21,12 @@ security:
       userAuthorizationUri: http://localhost:8902/microservice.auth.service/oauth/authorize
       clientAuthenticationScheme: form
     resource:
-      userInfoUri: http://localhost:8902/microservice.auth.service/user
-      preferTokenInfo: false  
+      user-info-uri: http://localhost:8902/microservice.auth.service/user
+      prefer-token-info: false
+logging:
+  level:
+    root: INFO
+    org.springframework.security: DEBUG
 ---
 spring:
   profiles: container

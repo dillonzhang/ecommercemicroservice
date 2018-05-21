@@ -20,6 +20,7 @@ logging:
   level:
     root: INFO
     org.hibernate: INFO
+    org.springframework.security: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
     org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
     org.springframework.cloud.sleuth: DEBUG
