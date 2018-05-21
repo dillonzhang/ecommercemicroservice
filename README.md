@@ -7,9 +7,10 @@ This is a microservices demo project, please follow below steps to access them. 
 5. run data.sql that in the project's resources folder
 6. access http://localhost:8002/product/1 to see the result
 7. check API from Swagger localhost:8102/swagger-ui.html
-8. get token http://localhost:8902/microservice.auth.service/oauth/token
+8. start your redis "redis-server.exe redis.windows.conf"
+9. get token http://localhost:8902/microservice.auth.service/oauth/token
 ![](https://github.com/dillonzhang/ecommercemicroservice/blob/develop/img-folder/gettoken.PNG)
-9. use token 
+10. use token 
 ![](https://github.com/dillonzhang/ecommercemicroservice/blob/develop/img-folder/usetoken.PNG)
 ## ReadyMe for Docker
 Precondition: Install docker and docker compose in your local
