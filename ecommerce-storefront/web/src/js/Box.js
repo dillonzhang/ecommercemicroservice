@@ -46,7 +46,7 @@ class Box extends React.Component {
             ).catch(function(err){
                     console.log("Fetch错误:"+err);
             });
-            fetch(`http://dillonzhang:8102/customerapi/customer/20`,{
+            fetch(`http://dillonzhang:8902/microservice.order.service/orderapi/order/1`,{
                 method: 'get',               
                 dataType: "json",
                 mode: 'cors',
@@ -71,9 +71,9 @@ class Box extends React.Component {
      render() {
         
         return (
-            <div className='box'>
+            <div className='box'>                
                  <Row className="show-grid">
-                    { this.state.persons.map(person => <Col xs={6} md={4}>{person.name}</Col>)}
+                    { this.state.persons.map((person,index) => <Col xs={6} md={4} key={index}>{person.name}</Col>)}
                   </Row>   
                   {/*
                         <ul>

@@ -13,7 +13,7 @@ class Logo extends React.Component {
 
      render() {        
         return (            
-            <Image src="http://via.placeholder.com/150x50" />
+            <Image src="http://via.placeholder.com/265x40" />
         );
     }
 }

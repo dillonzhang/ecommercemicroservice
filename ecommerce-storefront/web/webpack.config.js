@@ -50,16 +50,27 @@ module.exports = {
                 query: {
                   presets: ['es2015', 'env', 'react']
                 }
-            }
+            },
+            {
+                test: /\.(png|jpg|gif|svg)$/,
+                use: [
+                  {
+                    loader: 'url-loader',
+                    options: {
+                      limit: 8192
+                    }
+                  }
+                ]
+              }
 
-            // {
-            //     test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-            //     loader: "url?limit=10000"
-            // },
-            // {
-            //     test: /\.(ttf|eot|svg)(\?[\s\S]+)?$/,
-            //     loader: 'file'
-            // }, 
+            {
+                test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                loader: "url?limit=10000"
+            },
+            {
+                test: /\.(ttf|eot|svg)(\?[\s\S]+)?$/,
+                loader: 'file'
+            }, 
             // {test: /\.svg/, loader: 'svg-url-loader'}
         ]
     },

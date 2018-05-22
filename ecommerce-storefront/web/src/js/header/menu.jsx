@@ -2,33 +2,86 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import '../../less/lib/less/bootstrap.less';
-import {Nav,NavItem,NavDropdown,MenuItem,FormGroup,FormControl,Button,Navbar} from 'react-bootstrap';
+import {Grid,Row,Col} from 'react-bootstrap';
+
+import './menu.less';
 
 
+class MenuLayout extends React.Component {
+  toggeClick(ev){
+    this.props.onChangeIndex(ev);
+  }
+  toggeHide(ev){
+    this.props.onHideIndex(ev);
+  }
+  render(){
+    return(      
+        <div className={this.props.active ? 'menu-toggle active' :'menu-toggle'} onMouseEnter = {ev => this.toggeClick(ev)} onMouseLeave={ev => this.toggeHide(ev)}>
+          <div className="menu-name">{this.props.item.title}</div>
+          <div className="menu-list-wrap">
+            <Grid>
+              { this.props.item.menuList.map((list,index) =>(  
+                  <div className='sub-list-wrap' key={index}>
+                      <div className='sub-title'>
+                        { list.submenuTitle }
+                      </div>
+                      <div className='sub-list-layout'>
+                        {list.submenuList.map((sublist,index) => (
+                            <a key={index} href={sublist.href}>{sublist.name}</a>
+                        ))}
+                      </div>
+                  </div>     
+              ))}
+            </Grid>  
+          </div>
+        </div>      
+    )
+  } 
+}
 
 class Menu extends React.Component {  
     constructor(props){
-      super(props);
-      
-    }
+    super(props);
+    this.state = {
+      current: null,
+      footerList: [], 
+    }    
+  }
+  handleChange(index){     
+    this.setState({
+      current: index
+    })  
+  }
+  hideIndex(index){
+    this.setState({
+      current: null
+    })
+  }
+   componentWillMount(){         
+        var _this = this; 
+      fetch(`./menu.mock.json`,{
+            method: 'get',               
+            dataType: "json",
+        }).then(res => {
+            res.json().then(function(data){                   
+                const footerList = data; 
+                _this.setState({ footerList });
+                console.log(footerList);
+            })
+            }               
+        ).catch(function(err){
+                console.log("Fetch错误:"+err);
+        }); 
+      }
 
-     render() {        
-        return (
-            <Nav>
-              <NavItem eventKey={1} href="#">
-                Home
-              </NavItem>
-              <NavItem eventKey={2} href="/login/index.jsx">
-                login
-              </NavItem>
-              <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-                <MenuItem eventKey={3.1}>Action</MenuItem>
-                <MenuItem eventKey={3.2}>Another action</MenuItem>
-                <MenuItem eventKey={3.3}>Something else here</MenuItem>
-                <MenuItem divider />
-                <MenuItem eventKey={3.4}>Separated link</MenuItem>
-              </NavDropdown>
-            </Nav>
+     render() {       
+        let menuList = this.state.footerList.map((item,index) => {
+          return <MenuLayout active={this.state.current == index} item ={item} key={index} onChangeIndex={() => this.handleChange(index)} onHideIndex= {() => this.hideIndex(index)}/>
+        })   
+        return (    
+          <div className='menu-wrap'>
+              {menuList}
+          </div>   
         );
     }
 }

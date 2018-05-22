@@ -32,9 +32,17 @@ class FooterList extends React.Component {
      render() {          
         return (
             <Row className="footer-list">
-                { this.state.footerList.map((person,index) => <Col xs={12} sm={4} key={index} className='footer-list-layout'><a href='#'>{person.name}</a></Col>)}
-                { this.state.footerList.map((person,index) => <Col xs={12} sm={4} key={index} className='footer-list-layout'><a href='#'>{person.address.city}</a></Col>)}
-                { this.state.footerList.map((person,index) => <Col xs={12} sm={4} key={index} className='footer-list-layout'><a href='#'>{person.website}</a></Col>)}
+                { this.state.footerList.map((footer,index) => (
+                    <Col xs={12} sm={3} key={index} className='footer-list-layout'>
+                        <div className='footer-list-title'>{footer.title}</div>
+                        <div className='footer-list-item'>
+                        { footer.list.map((listitem,index) => (
+                            <a href='#' key={index}>{listitem}</a>
+                        ))}
+                        </div>
+                    </Col>
+                ))}
+         
              </Row> 
             
         );

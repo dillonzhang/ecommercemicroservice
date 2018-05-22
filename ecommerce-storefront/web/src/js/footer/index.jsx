@@ -16,13 +16,13 @@ class Footer extends React.Component {
      render() {
         
         return (
-            <Navbar>
+            <footer>
                 <Grid>
-                    <Row className="show-grid">
+                    <Row className="footer-label">
                         <FooterList url='footer.mock.json' />                       
                     </Row>
                 </Grid>
-            </Navbar>
+            </footer>
         );
     }
 }
