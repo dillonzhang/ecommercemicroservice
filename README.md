@@ -8,10 +8,15 @@ This is a microservices demo project, please follow below steps to access them. 
 6. access http://localhost:8002/product/1 to see the result
 7. check API from Swagger localhost:8102/swagger-ui.html
 8. start your redis "redis-server.exe redis.windows.conf"
-9. get token http://localhost:8902/microservice.auth.service/oauth/token
+9. 密码模式get token
 ![](https://github.com/dillonzhang/ecommercemicroservice/blob/develop/img-folder/gettoken.PNG)
-10. use token 
+10. 客户端模式 get token 
+![](https://github.com/dillonzhang/ecommercemicroservice/blob/develop/img-folder/clientgettoken.PNG)
+11. use token 
 ![](https://github.com/dillonzhang/ecommercemicroservice/blob/develop/img-folder/usetoken.PNG)
+
+Note that: refresh token for 密码模式还有bug，暂时用不了
+
 ## ReadyMe for Docker
 Precondition: Install docker and docker compose in your local
 
