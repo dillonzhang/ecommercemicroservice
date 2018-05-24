@@ -14,6 +14,8 @@ This is a microservices demo project, please follow below steps to access them. 
 ![](https://github.com/dillonzhang/ecommercemicroservice/blob/develop/img-folder/clientgettoken.PNG)
 11. use token 
 ![](https://github.com/dillonzhang/ecommercemicroservice/blob/develop/img-folder/usetoken.PNG)
+12. login endpoint 
+![](https://github.com/dillonzhang/ecommercemicroservice/blob/develop/img-folder/logintoken.PNG)
 
 Note that: refresh token for 密码模式还有bug，暂时用不了
 
