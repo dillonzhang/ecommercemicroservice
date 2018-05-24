@@ -20,7 +20,7 @@ import java.util.List;
  * @version 1.0
  */
 @RestController
-@RequestMapping("/cart")
+@RequestMapping("/cartapi/cart")
 public class CartController
 {
 	@Autowired
@@ -28,7 +28,7 @@ public class CartController
 
 	@ApiOperation(value = "Create a empty Cart", nickname = "createCart")
 	@ApiImplicitParam(name = "customerId", value = "Customer Id", dataType = "Long", required = true)
-	@PostMapping("/create")
+	@PostMapping
 	public ResponseEntity<Cart> createCart(@RequestParam final Long customerId)
 	{
 		return ResponseEntity.status(HttpStatus.OK).body(this.cartService.createCart(customerId));
@@ -36,7 +36,7 @@ public class CartController
 
 	@ApiOperation(value = "Get cart data by cart id", nickname = "getCartById")
 	@ApiImplicitParam(name = "cartId", value = "Cart Id", required = true, dataType = "Long", paramType = "path")
-	@GetMapping("/id/{cartId}")
+	@GetMapping("/{cartId}")
 	public ResponseEntity<Cart> getCartById(@PathVariable final Long cartId)
 	{
 		return ResponseEntity.status(HttpStatus.OK).body(this.cartService.getCartById(cartId));
@@ -56,7 +56,7 @@ public class CartController
 			@ApiImplicitParam(name = "cartEntry", value = "Cart entry data", required = true, dataType = "CartEntry")
 
 	})
-	@PostMapping("/{cartId}/create/entry")
+	@PostMapping("/{cartId}/entry")
 	public ResponseEntity<CartEntry> createCartEntry(@PathVariable final Long cartId, @RequestBody final CartEntry cartEntry)
 	{
 		return ResponseEntity.status(HttpStatus.OK).body(this.cartService.createCartEntry(cartId, cartEntry));
@@ -64,7 +64,7 @@ public class CartController
 
 	@ApiOperation(value = "Update Cart Data", nickname = "updateCartData")
 	@ApiImplicitParam(name = "cart", value = "Cart Data", required = true, dataType = "Cart")
-	@PutMapping("/update/cart")
+	@PutMapping
 	public ResponseEntity<Cart> updateCartData(@RequestBody final Cart cart)
 	{
 		return ResponseEntity.status(HttpStatus.OK).body(this.cartService.updataCart(cart));
@@ -72,7 +72,7 @@ public class CartController
 
 	@ApiOperation(value = "Update Cart Entry Data", nickname = "updateCartEntryData")
 	@ApiImplicitParam(name = "cartEntry", value = "Cart Entry Data", required = true, dataType = "CartEntry")
-	@PutMapping("/{cartId}/update/entry")
+	@PutMapping("/{cartId}/entry")
 	public ResponseEntity<CartEntry> updateCartEntryData(@PathVariable final Long cartId, @RequestBody final CartEntry cartEntry)
 	{
 		return ResponseEntity.status(HttpStatus.OK).body(this.cartService.updateCartEntry(cartId, cartEntry));
@@ -80,7 +80,7 @@ public class CartController
 
 	@ApiOperation(value = "Delete cart by id", nickname = "deleteCartById")
 	@ApiImplicitParam(name = "cartId", value = "Cart Id", required = true, dataType = "Long", paramType = "path")
-	@DeleteMapping("/delete/{cartId}")
+	@DeleteMapping("/{cartId}")
 	public ResponseEntity deleteCartById(@PathVariable final Long cartId)
 	{
 		this.cartService.deleteCart(cartId);
@@ -89,7 +89,7 @@ public class CartController
 
 	@ApiOperation(value = "Delete cart entry by id", nickname = "deleteCartEntryById")
 	@ApiImplicitParam(name = "entryId", value = "Entry Id", required = true, dataType = "Long", paramType = "path")
-	@DeleteMapping("/delete/entry/{entryId}")
+	@DeleteMapping("/entry/{entryId}")
 	public ResponseEntity deleteEntryById(@PathVariable final Long entryId)
 	{
 		this.cartService.deleteCartEntry(entryId);
