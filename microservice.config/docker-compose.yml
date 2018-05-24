@@ -1,0 +1,9 @@
+version: "3"
+
+services:
+
+  config-server:
+    image: ecom/microservice-config
+    restart: always
+    ports:
+      - "9090:9090"
