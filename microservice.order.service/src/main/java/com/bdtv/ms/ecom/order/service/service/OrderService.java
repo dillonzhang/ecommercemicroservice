@@ -9,22 +9,23 @@ import com.bdtv.ms.ecom.order.service.entity.OrderEntry;
 
 public interface OrderService {
 	Order createOrder(Order order);
-	
+
 	Order getOrderById(Long orderId);
-	
+
 	List<Order> getOrders();
-	
+
 	void deleteOrderById(Long orderId);
-	
+
 	Order updateOrder(Long orderId, Order order);
-	
-	Product getProductById(Long productId);
-	
+
+	Product getProductById(Long productId, String accessToken);
+
 	OrderEntry createOrderEntry(Long orderId, OrderEntry orderEntry);
-	
+
 	Set<OrderEntry> getOrderEntriesByOrderId(Long orderId);
-	
-	OrderEntry updateOrderEntry(Long orderId, Long orderEntryId, OrderEntry orderEntry);
-	
+
+	OrderEntry updateOrderEntry(Long orderId, Long orderEntryId,
+			OrderEntry orderEntry);
+
 	void deleteOrderEntry(Long orderId, Long orderEntryId);
 }
