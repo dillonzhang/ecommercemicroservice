@@ -9,51 +9,60 @@ import './login.less';
 class Login extends React.Component {  
     constructor(props){
       super(props);
-      
+      this.state ={
+        userName: null,
+        passWord: null
+      }
+      this.handleChange = this.handleChange.bind(this);
+      this.signIn = this.signIn.bind(this);
+    }
+    handleChange(ev) {
+        this.setState({
+          userName: ev.target.value
+        })
+        {/*alert(this.state.userName + "+++++++++" + ev.target.value);*/}
     }
 
-    componentWillMount(){         
-        var _this = this; 
-        fetch(`./categorySelect.mock.json`,{
-            method: 'get',               
-            dataType: "json",
-        }).then(res => {
-            res.json().then(function(data){                   
-                const categorySelect = data; 
-                _this.setState({ categorySelect });
-                console.log(categorySelect);
-            })
-            }               
-        ).catch(function(err){
-                console.log("Fetch错误:"+err);
-        }); 
-
-
-
-
-        let url = "http://dillionzhangt:8902/microservice.auth.service/oauth/token";
-
-        let formData = new FormData();
-        formData.append('client_id','client_2');
-        formData.append('client_secret', '123456');
-        formData.append('grant_type', 'password');
-        formData.append('username', this.state.userName);
-        formData.append('password', this.state.passWord);
-        formData.append('scope', 'select');
-        
-
-        fetch(url,{
-            method: 'post',
-            body: formData,
-        }).then(function (res) {
-            return res.json();
-        }).then(function (json) {
-            if (json.code == "200") {
-                console.log("232323233-----正确")
-            }else if (json.code == "400") {
-                console.log("2323232323------错了～")
-            }
+    handleChangePassword(ev) {
+        this.setState({
+          passWord: ev.target.value
         })
+      {/*alert(this.state.passWord + "+++++++++" + ev.target.value);*/}
+    }
+
+    signIn() {       
+      var url = "http://dillonzhang:8902/microservice.customer.service/loginapi/login";
+      var formData = new FormData();
+      formData.append('client_id','client_1');
+      formData.append('client_secret', '123456');
+      formData.append('grant_type', 'client_credentials');
+      var userdata = JSON.stringify({
+        "customerEmail" : this.state.userName,
+        "customerPwd" : this.state.passWord,
+      })
+
+
+      fetch(url, {
+        method: 'POST',  
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }, 
+        body: userdata,
+        
+      }).then(function (res) {
+          return res.json();
+      }).then(function (json) {
+          localStorage.setItem('accessToken', JSON.stringify(json.accessToken));          
+          var accessToken = JSON.parse(localStorage.getItem('accessToken'));
+          if (accessToken != "" || accessToken != undefined) {
+              alert("-----正确")
+          }else{
+              alert("------错了～")
+          }
+      }).catch(function(err){
+              console.log("Fetch错误1111:"+err);
+      });
 
     }
 
@@ -66,7 +75,7 @@ class Login extends React.Component {
                     Email
                   </Col>
                   <Col sm={10}>
-                    <FormControl type="email" placeholder="Email" />
+                    <input className='form-control' type="text" placeholder="Email" value={this.state.value} onChange= {(ev) => this.handleChange(ev)}/>
                   </Col>
                 </FormGroup>
 
@@ -75,7 +84,7 @@ class Login extends React.Component {
                     Password
                   </Col>
                   <Col sm={10}>
-                    <FormControl type="password" placeholder="Password" />
+                    <input className='form-control' type="password" placeholder="Password" onChange= {(ev) => this.handleChangePassword(ev)}/>
                   </Col>
                 </FormGroup>
 
@@ -88,7 +97,7 @@ class Login extends React.Component {
 
                 <FormGroup>
                   <Col smOffset={2} sm={10}>
-                    <Button type="submit">Sign in</Button>
+                    <div className='btn btn-default' onClick={this.signIn}>Sign in</div>
                   </Col>
                 </FormGroup>
               </Form>

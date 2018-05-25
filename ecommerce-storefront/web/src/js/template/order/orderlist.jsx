@@ -15,23 +15,32 @@ class OrderList extends React.Component {
     }
     componentWillMount(){         
         var _this = this; 
-          fetch(`./orderlist.mock.json`,{
+        let token = '95307c5f-abaf-4991-94a4-4a05f11a481a';
+        let path= 'http://dillonzhang:8902/microservice.order.service/orderapi/order/1?access_token='
+        let url = path + token ;
+          {/*fetch(`./orderlist.mock.json`,{*/}
+          fetch(url,{
                 method: 'get',               
                 dataType: "json",
             }).then(res => {
                 res.json().then(function(data){                   
-                    const orderList = data; 
+                    {/*const orderList = data;*/ }
+                    const orderList = Array.of(data); 
                     _this.setState({ orderList });
+
+
+                    if(data.code == 401){
+                        console.log("2323232323------错了～")
+                    }
                 })
-                }               
-            ).catch(function(err){
+            }).catch(function(err){
                     console.log("Fetch错误:"+err);
             }); 
           }
 
      render() {          
         return (
-            <Grid>                
+            <div className=''>                
                 {this.state.orderList.map((list,index,k) => (                         
                      <div key={index} className='order-list-layout clearfix'>  
                         <div className='order-list-title clearfix'>
@@ -55,7 +64,7 @@ class OrderList extends React.Component {
                         </div>
                     </div>
                 ))} 
-             </Grid>
+             </div>
             
         );
     }

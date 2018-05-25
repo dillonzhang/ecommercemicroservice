@@ -14,7 +14,7 @@ class CategorySelect extends React.Component {
         categorySelect: [],
         show: true, 
         active: false,
-        current: null     
+        current: null
       }
       this.handleClick = this.handleClick.bind(this);
     }
@@ -25,7 +25,7 @@ class CategorySelect extends React.Component {
         current: index  
       }))
     }
-
+ 
     componentWillMount(){         
         var _this = this; 
         fetch(`./categorySelect.mock.json`,{
@@ -46,10 +46,15 @@ class CategorySelect extends React.Component {
     
      render() {         
         return (
-            <div className='category-select-wrap'> 
-                {this.state.categorySelect.map((category,index) => (
-                    <Category category={category} key={index} />  
-                ))}
+            <div>
+                <div className='category-filter'>
+                
+                </div>
+                <div className='category-select-wrap'> 
+                    {this.state.categorySelect.map((category,index) => (
+                        <Category category={category} key={index} />  
+                    ))}
+                </div>
             </div>
         );
     }

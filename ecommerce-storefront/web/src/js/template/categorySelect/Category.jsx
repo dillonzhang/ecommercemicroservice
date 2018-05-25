@@ -15,7 +15,7 @@ class Category extends React.Component {
         }
         this.handleClick = this.handleClick.bind(this);
     }
-  handleClick(index){     
+  handleClick(){     
       this.setState((prevState) =>({
         active: !prevState.active
       }))
@@ -27,7 +27,7 @@ class Category extends React.Component {
              <div className='category-layout'>
                 <div className='category-layout-title clearfix'>
                     <span className='name'> {this.props.category.title} </span>
-                    <span className={this.state.active ?'clear active' : 'clear'}  onClick={() => this.handleClick(this) } > </span>
+                    <span className={this.state.active ?'clear active' : 'clear'}  onClick={this.handleClick} > </span>
                 </div>
                 <ul className={this.state.active ?'category-list-wrap hide' :'category-list-wrap' }>
                     {this.props.category.categoryList.map((list,index) => (                                            
