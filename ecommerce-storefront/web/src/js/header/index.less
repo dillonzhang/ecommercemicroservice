@@ -1,0 +1,55 @@
+@import '../../less/lib/less/bootstrap.less';
+
+header {
+    position: relative;
+    border-bottom: 1px solid @gray-lighter;
+    .header-top {
+        padding: @padding-large-vertical 0;
+        display: flex;
+        align-items: center;
+    }
+}
+
+
+.currency-column {
+    text-align: right;
+    margin-right: @padding-large-vertical*5;
+    &-item {
+        margin-right: @padding-large-vertical;
+        margin-left: @padding-large-vertical*2;
+    }
+    .sessionSettings_button {
+        position: relative;        
+        &:after {
+            display: inline-block;
+            content: "";
+            background-image: url(//s3.thcdn.com/www/common/images/flags/1x1/gb-9681a43477.svg);
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            position: absolute;
+            top: -3px;
+            right: -30px;
+        }
+    }
+}
+
+.menu-layout {
+    position: static !important;
+}
+.header-unit-wrap {
+    text-align: right;   
+
+    .nav-menu-account {
+        margin: @padding-large-vertical 0 0;
+    }
+
+    .header-account,
+    .header-bag {
+        margin: 5px 20px;
+        display: inline-block;
+        line-height: 2;
+    }
+}

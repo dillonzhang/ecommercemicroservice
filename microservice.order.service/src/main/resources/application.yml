@@ -3,6 +3,11 @@ server:
 spring:
   application:
     name: microservice.order.service
+  zipkin:
+    base-url: http://localhost:9411
+  sleuth:
+    sampler:
+      percentage: 1.0
   jpa:
     database: MYSQL
     hibernate:
@@ -18,7 +23,13 @@ logging:
     org.hibernate: INFO
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
     org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
-
+    org.springframework.cloud.sleuth: DEBUG
+security:
+  oauth2:
+    resource:
+      id: microservice.order.service
+      userInfoUri: http://localhost:8902/microservice.auth.service/user
+      preferTokenInfo: false
 management:
   endpoints:
     web:
