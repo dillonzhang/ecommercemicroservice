@@ -11,6 +11,14 @@ node {
         }
     }
 
+    stage('Deploy to Kubernetes') {
+        microserviceProjects = readDir("${workspace}")
+        microserviceProjects.each { projectName ->
+            if(projectName == "microservice.config")
+                sh "/usr/local/bin/kubectl create -f ${projectName}/config-server-deployment.yaml  --kubeconfig=/var/lib/jenkins/kubeconfig"
+        }
+    }
+
 }
 
 @NonCPS
