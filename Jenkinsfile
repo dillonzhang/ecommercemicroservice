@@ -6,8 +6,10 @@ node {
 
         microserviceProjects = readDir("${workspace}")
         println microserviceProjects
+        def excludeProjects = ["img-folder","microservice.auth.service","microservice.boot.admin"]
         microserviceProjects.each { projectName ->
-            sh "mvn -f ${projectName}/pom.xml dockerfile:build dockerfile:push"
+            if(!excludeProjects.contains(projectName))
+                sh "mvn -f ${projectName}/pom.xml dockerfile:build dockerfile:push"
         }
     }
 
