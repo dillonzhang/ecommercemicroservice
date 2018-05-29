@@ -1,0 +1,81 @@
+@import '../../less/lib/less/bootstrap.less';
+
+.menu-wrap {    
+    .menu-title-list {
+        padding: 0;
+        list-style: none;
+        li {
+            float: left;
+            margin-right: 20px;
+            &.active {
+                font-weight: bold;
+            }
+        }
+    }
+
+    .menu-layout-wrap {
+        position: absolute;
+        width: 100%;
+        background: #fff;
+        z-index: 1;
+        margin-top:1px 
+    }
+    .menu-layout-item {
+        display: none; 
+
+        &.active {
+            display: block;
+        }
+    }
+}
+
+.menu-toggle {
+    cursor: pointer;
+
+    .menu-name {
+        float: left;
+        margin-right: 16px;
+        font-weight: bold;
+        line-height: 2;
+        padding: 0 10px;
+        font-size: 20px;
+    }
+    &.active {
+       .menu-list-wrap {
+            display: block;
+        } 
+    }
+
+    .menu-list-wrap {
+        display: none;
+        position: absolute;
+        top: 102px;
+        left: 0;
+        background: #fff;
+        width: 100%;
+        z-index: 2;
+        padding: 20px;
+        box-shadow: 2px 2px 3px #ccc;
+
+
+        .sub-list-wrap {
+            float: left;
+            width: 20%;           
+            margin-right: 10px;
+            .sub-title {
+                font-weight: bold;               
+            }
+            .sub-list-layout {
+                margin-top: 10px;
+
+                a {
+                    display: block;
+                    line-height: 2;
+
+                }
+            }
+        }
+    }
+
+
+}
