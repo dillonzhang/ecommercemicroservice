@@ -1,0 +1,76 @@
+@import '../../../less/lib/less/bootstrap.less';
+
+.category-select-wrap{
+    margin-top: 10px;
+
+    .category-layout {
+        &-title {            
+            border-bottom: 1px solid @gray-lighter;
+            padding: 10px 0;
+            position: relative;
+
+            .name {
+                float: left;
+                font-size: 16px;
+                font-weight: bold;
+            }  
+
+            .clear {
+                float: right;
+                cursor: pointer;
+                border: 7px solid;
+                border-color: transparent transparent #ccc transparent;
+                position: absolute;
+                top: 10px;
+                right: 10px;
+
+                &.active {
+                    transform: rotate(180deg);
+                    top: 20px;
+                }
+            }
+        }
+    }
+
+    .category-list-wrap {
+        list-style: none;
+        padding: 0;
+        margin-top: 10px;
+
+        &.hide {
+            display: none;
+        }
+
+        li {
+            position: relative;
+            margin: 5px 0;
+            .category-item-input {
+                width: 22px;
+                height: 22px;
+                margin: 0;
+                vertical-align: middle;
+
+                &::before {
+                    width: 22px;
+                    height: 22px;
+                    content: "";
+                    left: 0;
+                    top: 0;
+                    cursor: pointer;
+                    position: absolute;
+                    background: #fff;
+                    border: 1px solid #ccc;
+                }
+
+                &:checked {
+                    &::before {
+                        background: #000;
+                    }
+                }
+            }
+            .category-item-name {
+                margin-left: 10px;
+            }
+        }
+    }
+}

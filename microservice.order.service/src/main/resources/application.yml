@@ -24,7 +24,12 @@ logging:
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
     org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
     org.springframework.cloud.sleuth: DEBUG
-
+security:
+  oauth2:
+    resource:
+      id: microservice.order.service
+      userInfoUri: http://localhost:8902/microservice.auth.service/user
+      preferTokenInfo: false
 management:
   endpoints:
     web:
