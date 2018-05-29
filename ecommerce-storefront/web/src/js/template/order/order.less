@@ -1,0 +1,28 @@
+@import '../../../less/lib/less/bootstrap.less';
+
+.order-list-layout{
+    margin-top: 10px;
+    border: 1px solid @gray-lighter;  
+
+    .order-list-title {
+        font-weight: bold;
+        line-height:2;
+        background: @gray-lighter;
+    }
+    .order-list-wrap {
+        display: flex;
+        align-items: center;
+        .list-entry-item:not(:last-child) {
+            border-bottom: 1px solid @gray-lighter;
+        }
+        .list-entry {
+            border: 1px solid @gray-lighter;  
+            border-top: 0;
+            border-bottom: 0;
+            padding: 10px 0;
+        }  
+        .list-entry-item {
+            padding: 5px 20px;
+        }
+    }
+}
