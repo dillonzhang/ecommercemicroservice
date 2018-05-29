@@ -1,13 +1,13 @@
 This is a microservices demo project, please follow below steps to access them.  If you use docker, please see the "ReadyMe for Docker" section.
 
-1. make sure you have MySql installed
-2. build this project by command "mvn package"
-3. start it by "java -jar microservice.product.service-0.0.1-SNAPSHOT.jar > 1.log" under your project's target folder
-4. check the log in 1.log that in target folder
-5. run data.sql that in the project's resources folder
-6. access http://localhost:8002/product/1 to see the result
-7. check API from Swagger localhost:8102/swagger-ui.html
-8. start your redis "redis-server.exe redis.windows.conf"
+1. make sure you have MySql and Redis installed
+2. build the projects by command "mvn clean package"
+3. start by right click the Application.java and select run as java application
+4. check the application.yml and prepare database account 
+5. run data.sql that in the project's resources folder if needs
+6. start those common microservice follow this order: Eureka, Zuul, Auth
+7. start business microservice like Product service and check API from Swagger localhost:8102/swagger-ui.html
+8. those API needs Oauth Token to access, current solution support Client Credentials and Resource Owner Password Credentials, details in following steps
 9. 密码模式get token
 ![](https://github.com/dillonzhang/ecommercemicroservice/blob/develop/img-folder/gettoken.PNG)
 10. 客户端模式 get token 
