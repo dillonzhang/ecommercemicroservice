@@ -1,0 +1,59 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose -f docker-compose.yml convert
+    kompose.version: 1.13.0 ()
+  creationTimestamp: null
+  labels:
+    io.kompose.service: customer-service
+  name: customer-service
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: customer-service
+    spec:
+      containers:
+      - env:
+        - name: DATABASE_HOST
+          value: mysql-customer
+        - name: DATABASE_NAME
+          value: mscustomer
+        - name: DATABASE_PASSWORD
+          value: msecom
+        - name: DATABASE_PORT
+          value: "3306"
+        - name: DATABASE_USER
+          value: msecom
+        image: 10.34.0.143/ecommerce/microservice.customer.service
+        name: customer-service
+        ports:
+        - containerPort: 8102
+        resources: {}
+      restartPolicy: Always
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose -f docker-compose.yml convert
+    kompose.version: 1.13.0 ()
+  creationTimestamp: null
+  labels:
+    io.kompose.service: customer-service
+  name: customer-service
+spec:
+  type: NodePort
+  ports:
+  - port: 8102
+    targetPort: 8102
+    nodePort: 30004
+  selector:
+    io.kompose.service: customer-service
+status:
+  loadBalancer: {}

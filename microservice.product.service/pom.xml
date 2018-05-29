@@ -135,6 +135,7 @@
                     <username>Admin</username>
                     <password>Harbor12345</password>
                     <repository>${docker.image.prefix}/${project.artifactId}</repository>
+                    <tag>${project.version}</tag>
                     <buildArgs>
                         <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
                     </buildArgs>
