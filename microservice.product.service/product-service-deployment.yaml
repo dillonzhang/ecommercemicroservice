@@ -29,7 +29,7 @@ spec:
           value: "3306"
         - name: DATABASE_USER
           value: msecom
-        image: 10.34.0.143/ecommerce/microservice.product.service
+        image: 10.34.0.143/ecommerce/microservice.product.service:0.0.1-SNAPSHOT
         name: product-service
         ports:
         - containerPort: 8002

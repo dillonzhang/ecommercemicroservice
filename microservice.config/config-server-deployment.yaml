@@ -18,7 +18,7 @@ spec:
         io.kompose.service: config-server
     spec:
       containers:
-      - image: 10.34.0.143/ecommerce/microservice-config
+      - image: 10.34.0.143/ecommerce/microservice-config:0.0.1-SNAPSHOT
         name: config-server
         ports:
         - containerPort: 9090

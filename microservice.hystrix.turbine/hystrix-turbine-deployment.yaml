@@ -18,7 +18,7 @@ spec:
         io.kompose.service: hystrix-turbine
     spec:
       containers:
-      - image: 10.34.0.143/ecommerce/microservice.hystrix.turbine
+      - image: 10.34.0.143/ecommerce/microservice.hystrix.turbine:0.0.1-SNAPSHOT
         name: hystrix-turbine
         ports:
         - containerPort: 8904

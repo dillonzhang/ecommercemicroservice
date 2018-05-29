@@ -18,7 +18,7 @@ spec:
         io.kompose.service: zipkin-service
     spec:
       containers:
-      - image: 10.34.0.143/ecommerce/microservice.zipkin.service
+      - image: 10.34.0.143/ecommerce/microservice.zipkin.service:0.0.1-SNAPSHOT
         name: zipkin-service
         ports:
         - containerPort: 8905

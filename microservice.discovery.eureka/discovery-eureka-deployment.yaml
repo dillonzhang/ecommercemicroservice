@@ -18,7 +18,7 @@ spec:
         io.kompose.service: discovery-eureka
     spec:
       containers:
-      - image: 10.34.0.143/ecommerce/microservice-discovery-eureka
+      - image: 10.34.0.143/ecommerce/microservice-discovery-eureka:0.0.1-SNAPSHOT
         name: discovery-eureka
         ports:
         - containerPort: 8761

@@ -18,7 +18,7 @@ spec:
         io.kompose.service: hystrix-dashboard
     spec:
       containers:
-      - image: 10.34.0.143/ecommerce/microservice.hystrix.dashboard
+      - image: 10.34.0.143/ecommerce/microservice.hystrix.dashboard:0.0.1-SNAPSHOT
         name: hystrix-dashboard
         ports:
         - containerPort: 8903

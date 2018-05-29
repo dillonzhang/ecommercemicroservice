@@ -31,7 +31,7 @@ node {
                 sh "/usr/local/bin/kubectl create -f ${projectName}/hystrix-dashboard-deployment.yaml  --kubeconfig=/var/lib/jenkins/kubeconfig"
 
             if(projectName == "microservice.hystrix.turbine")
-                sh "/usr/local/bin/kubectl create -f ${projectName}/kystrix-turbine-deployment.yaml  --kubeconfig=/var/lib/jenkins/kubeconfig"
+                sh "/usr/local/bin/kubectl create -f ${projectName}/hystrix-turbine-deployment.yaml  --kubeconfig=/var/lib/jenkins/kubeconfig"
 
             if(projectName == "microservice.order.service"){
                 sh "/usr/local/bin/kubectl create -f ${projectName}/mysql-order-deployment.yaml  --kubeconfig=/var/lib/jenkins/kubeconfig"
