@@ -47,7 +47,7 @@ metadata:
   name: mysql-order
 spec:
   ports:
-  - port: 3326
+  - port: 3306
     targetPort: 3306
   selector:
     io.kompose.service: mysql-order
