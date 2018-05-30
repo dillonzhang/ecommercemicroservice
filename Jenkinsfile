@@ -9,7 +9,7 @@ node {
         def excludeProjects = ["img-folder","microservice.auth.service","microservice.boot.admin", "microservice.cart.service"]
         microserviceProjects.each { projectName ->
             if(!excludeProjects.contains(projectName))
-                //sh "mvn -f ${projectName}/pom.xml dockerfile:build dockerfile:push"
+                sh "mvn -f ${projectName}/pom.xml dockerfile:build dockerfile:push"
         }
     }
 
