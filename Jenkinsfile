@@ -6,6 +6,15 @@ node {
 
         microserviceProjects = readDir("${workspace}")
         println microserviceProjects
+        def excludeProjects = ["img-folder"]
+        microserviceProjects.each { projectName ->
+            if(!excludeProjects.contains(projectName))
+                sh "mvn -f ${projectName}/pom.xml clean package"
+        }
+    }
+
+    stage('Build image and push to Harbor') { // for display purposes
+        microserviceProjects = readDir("${workspace}")
         def excludeProjects = ["img-folder","microservice.auth.service","microservice.boot.admin", "microservice.cart.service"]
         microserviceProjects.each { projectName ->
             if(!excludeProjects.contains(projectName))
