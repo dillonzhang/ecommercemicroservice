@@ -38,11 +38,9 @@ metadata:
     io.kompose.service: config-server
   name: config-server
 spec:
-  type: NodePort
   ports:
   - port: 9090
     targetPort: 9090
-    nodePort: 30090
   selector:
     io.kompose.service: config-server
 status:
