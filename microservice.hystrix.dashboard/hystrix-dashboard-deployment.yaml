@@ -1,0 +1,47 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose -f docker-compose.yml convert
+    kompose.version: 1.13.0 ()
+  creationTimestamp: null
+  labels:
+    io.kompose.service: hystrix-dashboard
+  name: hystrix-dashboard
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: hystrix-dashboard
+    spec:
+      containers:
+      - image: 10.34.0.143/ecommerce/microservice.hystrix.dashboard:0.0.1-SNAPSHOT
+        name: hystrix-dashboard
+        ports:
+        - containerPort: 8903
+        resources: {}
+      restartPolicy: Always
+status: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose -f docker-compose.yml convert
+    kompose.version: 1.13.0 ()
+  creationTimestamp: null
+  labels:
+    io.kompose.service: hystrix-dashboard
+  name: hystrix-dashboard
+spec:
+  ports:
+  - port: 8903
+    targetPort: 8903
+  selector:
+    io.kompose.service: hystrix-dashboard
+status:
+  loadBalancer: {}
