@@ -1,5 +1,6 @@
 package com.bdtv.ms.ecom.cart.service.feign;
 
+import com.bdtv.ms.ecom.cart.service.config.FeignConfiguration;
 import com.bdtv.ms.ecom.cart.service.data.Stock;
 import com.bdtv.ms.ecom.cart.service.feign.hystrix.StockFeignClientHystrix;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @version 1.0
  */
 
-@FeignClient(name = "microservice.stock.service", fallback = StockFeignClientHystrix.class)
+@FeignClient(name = "microservice.stock.service", configuration = FeignConfiguration.class, fallback = StockFeignClientHystrix.class)
 public interface StockFeignClient
 {
 	@GetMapping("/stockapi/stock")
