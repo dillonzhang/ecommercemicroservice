@@ -1,8 +1,8 @@
 server:
-  port: 8011
+  port: 8012
 spring:
   application:
-    name: microservice.cart.service
+    name: microservice.stock.service
   zipkin:
     base-url: http://localhost:9411
   sleuth:
@@ -14,7 +14,7 @@ spring:
       ddl-auto: update
   datasource:
     driver: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/mscart?createDatabaseIfNotExist=true&useUnicode=true&autoReconnect=true
+    url: jdbc:mysql://localhost:3306/msstock?createDatabaseIfNotExist=true&useUnicode=true&autoReconnect=true
     username: msecom
     password: msecom
 logging:

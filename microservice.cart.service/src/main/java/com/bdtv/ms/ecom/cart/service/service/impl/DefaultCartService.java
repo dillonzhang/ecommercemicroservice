@@ -1,13 +1,16 @@
 package com.bdtv.ms.ecom.cart.service.service.impl;
 
 import com.bdtv.ms.ecom.cart.service.data.Product;
+import com.bdtv.ms.ecom.cart.service.data.Stock;
 import com.bdtv.ms.ecom.cart.service.entity.Cart;
 import com.bdtv.ms.ecom.cart.service.entity.CartEntry;
 import com.bdtv.ms.ecom.cart.service.feign.ProductFeignClient;
+import com.bdtv.ms.ecom.cart.service.feign.StockFeignClient;
 import com.bdtv.ms.ecom.cart.service.repository.CartEntryRepository;
 import com.bdtv.ms.ecom.cart.service.repository.CartRepository;
 import com.bdtv.ms.ecom.cart.service.service.CartService;
 import com.bdtv.ms.ecom.cart.service.service.exception.CartNotFoundException;
+import com.bdtv.ms.ecom.cart.service.service.exception.OutOfStockException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +39,9 @@ public class DefaultCartService implements CartService
 
 	@Autowired
 	private ProductFeignClient productFeignClient;
+
+	@Autowired
+	private StockFeignClient stockFeignClient;
 
 	@Override
 	public Cart createCart(final Long customerId)
@@ -128,6 +134,12 @@ public class DefaultCartService implements CartService
 			cartEntry.setSubTotal(BigDecimal.ZERO);
 			cartEntry.setTax(BigDecimal.ZERO);
 			cartEntry.setTotalPrice(BigDecimal.ZERO);
+		}
+
+		Stock stock = stockFeignClient.getStockByProductId(productId).getBody();
+		if(stock.getStockLevel()< cartEntry.getCount())
+		{
+			throw new OutOfStockException("Don't have enough stock.");
 		}
 
 		this.cartEntryRepository.saveAndFlush(cartEntry);

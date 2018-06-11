@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.bdtv.ms.ecom</groupId>
-	<artifactId>microservice.cart.service</artifactId>
+	<artifactId>microservice.stock.service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>microservice.cart.service</name>
+	<name>microservice.stock.service</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
