@@ -3,15 +3,6 @@ server:
 spring:
   application:
     name: microservice.auth.service
-  jpa:
-    database: MYSQL
-    hibernate:
-      ddl-auto: update
-  datasource:
-    driver: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/msorder?createDatabaseIfNotExist=true&useUnicode=true&autoReconnect=true
-    username: msecom
-    password: msecom
 security:
   oauth2:
     resource:
