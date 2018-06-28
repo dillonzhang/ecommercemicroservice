@@ -36,6 +36,7 @@ logging:
     org.springframework.security: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
     org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
+    com.bdtv.ms.ecom.product.service.controller: DEBUG
 
 eureka:
   client:

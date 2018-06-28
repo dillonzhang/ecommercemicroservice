@@ -1,7 +1,7 @@
 spring:
   cloud:
     config:
-      name: ms-product
+      name: ms-order
       failFast: true
       profile: dev
       label: config-label-v2.0

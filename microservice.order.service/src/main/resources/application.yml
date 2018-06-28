@@ -34,7 +34,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: hystrix.stream, info, health
+        include: hystrix.stream, info, health, refresh
 
 eureka:
   client:

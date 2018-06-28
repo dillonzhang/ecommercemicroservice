@@ -8,6 +8,8 @@ import javax.validation.Valid;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -27,6 +29,7 @@ import com.bdtv.ms.ecom.order.service.entity.Order;
 import com.bdtv.ms.ecom.order.service.service.OrderService;
 
 @RestController
+@RefreshScope
 @RequestMapping("/orderapi")
 public class OrderController {
 
@@ -86,4 +89,14 @@ public class OrderController {
 		this.orderService.deleteOrderById(orderId);
 		return ResponseEntity.status(HttpStatus.OK).build();
 	}
+
+	@Value("${profile}")
+	private String profile;
+
+	@ApiOperation(value = "get profile from Spring Cloud Config", notes = "this is the method to get profile from Spring Cloud Config")
+	@GetMapping("/profile")
+	public String hello() {
+		return this.profile;
+	}
+
 }
