@@ -1,3 +1,16 @@
+zuul:
+  #prefix: /api
+  sensitiveHeaders: Cookie,Set-Cookie
+  routes:
+    orderservice:
+      path: /order/**
+      serviceId: microservice.order.service
+    productservice:
+      path: /product/**
+      serviceId: microservice.product.service
+    customerservice:
+      path: /customer/**
+      serviceId: microservice.customer.service
 server:
   port: 8902
 spring:
@@ -27,6 +40,11 @@ logging:
   level:
     root: INFO
     org.springframework.security: DEBUG
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream, routes, health, refresh
 ---
 spring:
   profiles: container

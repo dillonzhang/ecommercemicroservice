@@ -32,12 +32,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				+ bCryptPasswordEncoder.encode("123456");
 		InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
 		manager.createUser(User.withUsername("user_1").password(finalPassword)
-				.authorities("USER").build());
+				.roles("USER").build());
 		manager.createUser(User.withUsername("user_2").password(finalPassword)
-				.authorities("USER").build());
+				.roles("USER").build());
+		manager.createUser(User.withUsername("admin").password(finalPassword)
+				.roles("ADMIN").build());
 		return manager;
 	}
-
 	// password 方案三：支持多种编码，通过密码的前缀区分编码方式,推荐
 	@Bean
 	PasswordEncoder passwordEncoder() {
