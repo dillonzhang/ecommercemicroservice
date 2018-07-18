@@ -31,34 +31,36 @@ import com.bdtv.ms.ecom.product.service.service.ProductService;
 @RefreshScope
 @RequestMapping("/productapi")
 public class ProductController {
-	private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(ProductController.class);
 
 	@Autowired
 	private ProductService productService;
 
-	@Value("${mockEnabled}")
-	private String mockEnabled;
-	
-	@ApiOperation(value="get product by ID", notes="this is the method to retrive a product by ID")
-	@ApiImplicitParam(name = "id", value = "product ID", required = true, dataType = "Long", paramType="path")
+	@Value("${paramater}")
+	private String parameter;
+
+	@ApiOperation(value = "get parameter from Spring Cloud Config", notes = "this is the method to get parameter from Spring Cloud Config")
+	@GetMapping("/parameter")
+	public String getParameter() {
+		return this.parameter;
+	}
+
+	@ApiOperation(value = "get product by ID", notes = "this is the method to retrive a product by ID")
+	@ApiImplicitParam(name = "id", value = "product ID", required = true, dataType = "Long", paramType = "path")
 	@GetMapping("/product/{id}")
 	public ResponseEntity<Product> findById(@PathVariable Long id) {
-		LOGGER.debug("mockEnabled is {} ", this.mockEnabled);
-		if ("true".equalsIgnoreCase(mockEnabled)){
-			Product product = this.createMockProduct();
-			return ResponseEntity.status(HttpStatus.OK).body(product);
-		}
-
 		try {
 			Product p = this.productService.getProductById(id);
 			return ResponseEntity.status(HttpStatus.OK).body(p);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage(), e);
 		}
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+				null);
 	}
-	
-	@ApiOperation(value="get all products", notes="this is the method to retrive all products")
+
+	@ApiOperation(value = "get all products", notes = "this is the method to retrive all products")
 	@GetMapping("/products")
 	public ResponseEntity<List<Product>> findAllProducts() {
 		try {
@@ -67,53 +69,58 @@ public class ProductController {
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage(), e);
 		}
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+				null);
 	}
-	
-	@ApiOperation(value="create a product", notes="this is the method to create a product")
+
+	@ApiOperation(value = "create a product", notes = "this is the method to create a product")
 	@ApiImplicitParam(name = "product", value = "Entry Product", required = true, dataType = "Product")
 	@PostMapping("/product")
-	public ResponseEntity<Product> createProduct(@Valid @RequestBody Product product) {
+	public ResponseEntity<Product> createProduct(
+			@Valid @RequestBody Product product) {
 		try {
 			Product p = this.productService.createProduct(product);
 			return ResponseEntity.status(HttpStatus.OK).body(p);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage(), e);
 		}
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+				null);
 	}
-	
-	@ApiOperation(value="update product information", notes="update the Product information according the ID and Product Model in the parameters")
+
+	@ApiOperation(value = "update product information", notes = "update the Product information according the ID and Product Model in the parameters")
 	@ApiImplicitParams({
-	       @ApiImplicitParam(name = "id", value = "product ID", required = true, dataType = "Long", paramType="path"),
-	       @ApiImplicitParam(name = "product", value = "Entry Product", required = true, dataType = "Product")
-	})
+			@ApiImplicitParam(name = "id", value = "product ID", required = true, dataType = "Long", paramType = "path"),
+			@ApiImplicitParam(name = "product", value = "Entry Product", required = true, dataType = "Product")})
 	@PutMapping("/product/{id}")
-	public ResponseEntity<Product> updateProduct(@PathVariable(value = "id") Long productId, @Valid @RequestBody Product product) {
+	public ResponseEntity<Product> updateProduct(
+			@PathVariable(value = "id") Long productId,
+			@Valid @RequestBody Product product) {
 		try {
 			Product p = this.productService.updateProduct(productId, product);
 			return ResponseEntity.status(HttpStatus.OK).body(p);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage(), e);
 		}
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+				null);
 	}
-	
-	@ApiOperation(value="delete product by ID", notes="this is the method to delete a product by ID")
-	@ApiImplicitParam(name = "id", value = "product ID", required = true, dataType = "Long", paramType="path")
+
+	@ApiOperation(value = "delete product by ID", notes = "this is the method to delete a product by ID")
+	@ApiImplicitParam(name = "id", value = "product ID", required = true, dataType = "Long", paramType = "path")
 	@DeleteMapping("/product/{id}")
-	public ResponseEntity<Void> deleteProduct(@PathVariable(value = "id") Long productId) {
+	public ResponseEntity<Void> deleteProduct(
+			@PathVariable(value = "id") Long productId) {
 		try {
 			this.productService.deleteProductById(productId);
 			return ResponseEntity.status(HttpStatus.OK).build();
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			LOGGER.error(e.getMessage(), e);
-		} 
+		}
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 	}
 
-	private Product createMockProduct(){
+	private Product createMockProduct() {
 		Product product = new Product();
 		product.setId(100L);
 		product.setCode("001");

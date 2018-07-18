@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
@@ -39,7 +40,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 				.authenticationEntryPoint(
 						(request, response, authException) -> response
 								.sendError(HttpServletResponse.SC_UNAUTHORIZED))
-				.and().authorizeRequests().antMatchers("/orderapi/**")
-				.authenticated().and().httpBasic();
+				.and().authorizeRequests().antMatchers(HttpMethod.DELETE)
+				.hasRole("ADMIN").antMatchers("/orderapi/**").authenticated()
+				.and().httpBasic();
 	}
 }

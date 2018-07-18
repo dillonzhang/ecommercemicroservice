@@ -1,6 +1,6 @@
 package com.bdtv.ms.ecom.order.service.entity;
 
-
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Set;
 
@@ -16,34 +16,39 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="orders")  
-public class Order {
+@Table(name = "orders")
+public class Order implements Serializable {
+
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = -6198783264131558177L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	@Column
 	@NotNull
 	private String name;
-	  
+
 	@Column
 	@NotNull
 	private BigDecimal totalPrice;
-	
+
 	@Column
 	private BigDecimal subTotal;
-	
+
 	@Column
 	private BigDecimal tax;
-	
+
 	@Column
 	@NotNull
 	private Long customerId;
-	
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy="order")  
-    private Set<OrderEntry> orderEntries;  
-    
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "order")
+	private Set<OrderEntry> orderEntries;
+
 	public Long getId() {
 		return id;
 	}
@@ -99,5 +104,5 @@ public class Order {
 	public void setCustomerId(Long customerId) {
 		this.customerId = customerId;
 	}
-	
+
 }

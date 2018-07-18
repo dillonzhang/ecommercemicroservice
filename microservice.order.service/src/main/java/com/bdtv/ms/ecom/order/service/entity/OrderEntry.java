@@ -1,5 +1,6 @@
 package com.bdtv.ms.ecom.order.service.entity;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
@@ -15,36 +16,41 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class OrderEntry {
+public class OrderEntry implements Serializable {
+
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 5558073044428052626L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	@Column
 	@NotNull
 	private BigDecimal totalPrice;
-	
+
 	@Column
 	@NotNull
 	private BigDecimal subTotal;
-	
+
 	@Column
 	private BigDecimal tax;
-	
+
 	@Column
 	@NotNull
 	private Long productId;
-	
+
 	@Column
 	@NotNull
 	private String count;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
-    @JoinColumn(name="order_id", nullable = false)  
+	@JoinColumn(name = "order_id", nullable = false)
 	private Order order;
-	
+
 	public Long getId() {
 		return id;
 	}
