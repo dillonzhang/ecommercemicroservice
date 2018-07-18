@@ -1,6 +1,12 @@
 package com.bdtv.ms.ecom.order.service.data;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 4821653519010608002L;
 	private Long id;
 	private String code;
 	private String name;
@@ -37,6 +43,5 @@ public class Product {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-}
 
+}

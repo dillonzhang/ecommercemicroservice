@@ -16,7 +16,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @EnableDiscoveryClient
 @EnableCircuitBreaker
 public class OrderApplication {
-
 	@Bean
 	@LoadBalanced
 	public RestTemplate restTemplate() {
